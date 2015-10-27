@@ -55,17 +55,17 @@ console.log('2000');
 Run this code for example in [repl.it](https://repl.it/) 
 and you will see that first output is 2000 which is not blocked by previous operations which needs 2 seconds to be completed. 
 
+#### Conclusion
+
+When you execute something **synchronously**, you wait for it to finish before moving on to another task.
+When you execute something **asynchronously**, you can move on to another task before it finishes.
+
 ## What is callback - heart of Node.js
 
 To fully understand how Node.js works you need to know what is callback
 
 The point of callbacks is that you pass them into some function that runs asynchronously;it stores your callback away,
 and when that function is done with whatever it needs to do, it will call your callback with the necessary parameters.
-
-Note: 
-
-When you execute something **synchronously**, you wait for it to finish before moving on to another task.
-When you execute something **asynchronously**, you can move on to another task before it finishes.
 
 **Example:**
 
