@@ -62,9 +62,14 @@ To fully understand how Node.js works you need to know what is callback
 The point of callbacks is that you pass them into some function that runs asynchronously;it stores your callback away,
 and when that function is done with whatever it needs to do, it will call your callback with the necessary parameters.
 
-Example:
+Note: 
 
-**Imagine we have some operation that runs for a long time, fetching some data from the database**
+When you execute something **synchronously**, you wait for it to finish before moving on to another task.
+When you execute something **asynchronously**, you can move on to another task before it finishes.
+
+**Example:**
+
+Imagine we have some operation that runs for a long time, fetching some data from the database
 
 ```
 function getStuffFromDatabase() {
@@ -72,7 +77,7 @@ function getStuffFromDatabase() {
 };
 ```
 
-**Since we don't want it to run synchronously, we'll pass in a callback**
+Since we don't want it to run synchronously, we'll pass in a callback
 
 ```
 function getStuffFromDatabase(callback) {
@@ -80,8 +85,8 @@ function getStuffFromDatabase(callback) {
 }
 ```
 
-**We'll simulate taking a long time with a call to ```setTimeout;```
-we'll also pretend we got some data from the database, but we'll just hardcode a string value.**
+We'll simulate taking a long time with a call to ```setTimeout;```
+we'll also pretend we got some data from the database, but we'll just hardcode a string value.
 
 ```
 function getStuffFromDatabase(callback) {
@@ -91,7 +96,7 @@ function getStuffFromDatabase(callback) {
 };
 ```
 
-**Finally, once we have the data, we'll call the callback function.**
+Finally, once we have the data, we'll call the callback function.
 
 ```
 function getStuffFromDatabase(callback) {
@@ -102,7 +107,7 @@ function getStuffFromDatabase(callback) {
 };
 ```
 
-**Call main function with callback that do something with your data**
+Call the function with callback that do something with your data
 
 ```
 getStuffFromDatabase(function(data) {
@@ -113,13 +118,13 @@ getStuffFromDatabase(function(data) {
 So, as you can see ```data``` came from the function that you pass your callback into; 
 it gives that data to you when it knows what that data should be.
 
-The reason you can't set a value in your callback and use it outside the callback is because the callback itself doesn't happen
-until later in time.
+The reason you can't set a value in your callback and use it outside the callback is because the **callback itself doesn't happen
+until later in time**.
 
 ```
 //  executed immediately      executed sometime in the future by getStuffFromDatabase
-//      |                                        |       
-//      v                                       v
+//      |                       |       
+//      v                       v
 getStuffFromDatabase(function(data) {
   var results = data; // <- this isn't available until sometime in the future!
 });
@@ -140,12 +145,11 @@ to retrieve files, fetch data (any event which take time to complete) and **not 
 
 Node.js platform uses **“Single Threaded Model with Event Loop”** architecture to handle multiple concurrent clients.
 
-Steps:
 
 1. Client send request to Web Server
 2. Node.js Web Server receives those requests and place them into a **Queue – known as “Event Queue”**.
-3. Node.js has internally a component, known as a **“Event Loop”** - which Picks up those requests one by one. 
-4. Event Loop uses **Single Thread** only – this is a heart of Node.js model.
+3. Node.js has a component internally, known as a **“Event Loop”** - which picks up those requests one by one. 
+4. Event Loop uses **Single Thread** only – which is a heart of Node.js model.
 **Single Thread means that the program can run one piece of code at a time**
 
     Event Loop job is:
